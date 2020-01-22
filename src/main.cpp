@@ -1,10 +1,12 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Game.hpp"
 
 int main()
 {
     sf::RenderWindow window;
     window.create(sf::VideoMode(500, 500), "Test window");
+    Game game;
 
     while (window.isOpen())
     {
@@ -14,6 +16,7 @@ int main()
             switch (event.type)
             {
             case sf::Event::Closed:
+                std::cout << game.getTitle() << std::endl;
                 window.close();
                 break;
             
