@@ -4,30 +4,11 @@
 
 int main()
 {
-    sf::RenderWindow window;
-    window.create(sf::VideoMode(500, 500), "Test window");
-    Game game;
+    Game* game = new Game();
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            switch (event.type)
-            {
-            case sf::Event::Closed:
-                std::cout << game.getTitle() << std::endl;
-                window.close();
-                break;
-            
-            default:
-                break;
-            }
-        }
-        
-        window.clear(sf::Color::Black);
-        window.display();
-    }
+    game->play();
+
+    delete game;
     
     return 0;
 }
