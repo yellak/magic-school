@@ -8,11 +8,15 @@ include_directories(include)
 include(CTest)
 enable_testing()
 
-#file(GLOB MAIN_SOURCES "src/*.cpp")
+set(SFML_LIBRARIES "sfml-graphics" "sfml-window" "sfml-system")
+
 set(MAIN_SOURCES "src/main.cpp" "src/Game.cpp")
 
 add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
-target_link_libraries("${PROJECT_NAME}" sfml-graphics sfml-window sfml-system)
+target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
+
+add_executable(ButtonTest "src/tests/ButtonTest.cpp" "src/Button.cpp")
+target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

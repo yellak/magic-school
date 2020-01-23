@@ -24,7 +24,6 @@ public:
 
     /**
      * @brief Destroy the Game object.
-     * 
      */
     ~Game();
 
