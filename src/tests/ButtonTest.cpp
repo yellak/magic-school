@@ -4,9 +4,10 @@
 int main()
 {
     sf::RenderWindow window;
-    window.create(sf::VideoMode(200, 200), "Button Test");
+    window.create(sf::VideoMode(300, 300), "Button Test");
 
-    Button button(40, 20);
+    Button button(20*1.96, 20);
+    Button button2(100, 0, 50*1.96, 50);
 
     while (window.isOpen())
     {
@@ -26,6 +27,7 @@ int main()
         
         window.clear(sf::Color::Black);
         window.draw(button);
+        window.draw(button2);
         window.display();
     }
     
