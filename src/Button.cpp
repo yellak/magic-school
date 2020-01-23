@@ -1,37 +1,43 @@
 #include "Button.hpp"
 
-Button::Button(float width, float height) : Button(0.f, 0.f, width, height)
+Button::Button(float scale) : Button(0.f, 0.f, scale)
 {
 }
 
-Button::Button(float x, float y, float width, float height) : points(sf::Quads, 4)
+Button::Button(float x, float y, float scale)
 {
-    points[0].position = sf::Vector2f(x, y);
-    points[1].position = sf::Vector2f(x + width, y);
-    points[2].position = sf::Vector2f(x + width, y + height);
-    points[3].position = sf::Vector2f(x, y + height);
-
     loadTexture();
+    loadSprite(x, y, scale);
 }
 
 Button::~Button()
 {
     delete texture;
+    delete sprite;
 }
 
 void Button::loadTexture()
 {
     texture = new sf::Texture();
     texture->loadFromFile("assets/textures/defaultButton.png");
-    points[0].texCoords = sf::Vector2f(0.f, 0.f);
-    points[1].texCoords = sf::Vector2f(599.f, 0.f);
-    points[2].texCoords = sf::Vector2f(599.f, 305.f);
-    points[3].texCoords = sf::Vector2f(0.f, 305.f);
+}
+
+void Button::loadSprite(float x, float y, float scale)
+{
+    sprite = new sf::Sprite();
+    sprite->setTexture(*texture);
+
+    sf::FloatRect globalBounds = sprite->getGlobalBounds();
+    float origin_x = globalBounds.left + globalBounds.width/2;
+    float origin_y = globalBounds.top + globalBounds.height/2;
+    sprite->setOrigin(origin_x, origin_y);
+
+    sprite->setPosition(x, y);
+    sprite->setScale(scale, scale);
 }
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    states.texture = texture;
     states.transform *= getTransform();
-    target.draw(points, states);
+    target.draw(*sprite, states);
 }

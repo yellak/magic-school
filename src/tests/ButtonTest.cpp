@@ -4,10 +4,10 @@
 int main()
 {
     sf::RenderWindow window;
-    window.create(sf::VideoMode(300, 300), "Button Test");
+    window.create(sf::VideoMode(500, 500), "Button Test");
 
-    Button button(20*1.96, 20);
-    Button button2(100, 0, 50*1.96, 50);
+    Button button(100.f, 100.f, 0.2);
+    Button button2(100.f, 200.f, 0.2);
 
     while (window.isOpen())
     {

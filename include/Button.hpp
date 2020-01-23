@@ -7,14 +7,15 @@ class Button : public sf::Drawable, public sf::Transformable
 {
 private:
     /**
-     * @brief The points that make the button.
-     */
-    sf::VertexArray points;
-
-    /**
      * @brief The texture of the button.
      */
     sf::Texture* texture;
+
+    /**
+     * @brief The sprite of the button.
+     * This is basically the shape of the button.
+     */
+    sf::Sprite* sprite;
 
     /**
      * @brief Called when we want to draw the button.
@@ -29,26 +30,32 @@ private:
      */
     void loadTexture();
 
+    /**
+     * @brief Load the sprite of the button with the texture.
+     * 
+     * @param x The x position of the sprite.
+     * @param y The y position of the sprite.
+     * @param scale The initial scale of the sprite.
+     */
+    void loadSprite(float x, float y, float scale);
+
 public:
     /**
      * @brief Construct a new Button object.
-     * The object dreated by this funtion has a position with values
-     * x = 0 and y = 0.
+     * The Button made has position x = 0 and y = 0.
      * 
-     * @param width The width of the button.
-     * @param height The height of the button.
+     * @param scale The initial scale of the button.
      */
-    Button(float width, float height);
+    Button(float scale);
 
     /**
      * @brief Construct a new Button object.
      * 
      * @param x The x position of the button.
      * @param y The y position of the button.
-     * @param width The width of the button.
-     * @param height The height of the button.
+     * @param scale The initial scale of the button.
      */
-    Button(float x, float y, float width, float height);
+    Button(float x, float y, float scale);
 
     /**
      * @brief Destroy the Button object
