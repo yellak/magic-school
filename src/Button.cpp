@@ -27,13 +27,23 @@ void Button::loadSprite(float x, float y, float scale)
     sprite = new sf::Sprite();
     sprite->setTexture(*texture);
 
+    setSpriteOriginToMiddle();
+
+    sprite->setPosition(x, y);
+    sprite->setScale(scale, scale);
+}
+
+void Button::setSpriteOriginToMiddle()
+{
     sf::FloatRect globalBounds = sprite->getGlobalBounds();
     float origin_x = globalBounds.left + globalBounds.width/2;
     float origin_y = globalBounds.top + globalBounds.height/2;
     sprite->setOrigin(origin_x, origin_y);
+}
 
-    sprite->setPosition(x, y);
-    sprite->setScale(scale, scale);
+sf::FloatRect Button::getGlobalBounds()
+{
+    return sprite->getGlobalBounds();
 }
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const

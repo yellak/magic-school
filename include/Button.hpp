@@ -39,6 +39,11 @@ private:
      */
     void loadSprite(float x, float y, float scale);
 
+    /**
+     * @brief Set the sprite origin to the middle of the button.
+     */
+    void setSpriteOriginToMiddle();
+
 public:
     /**
      * @brief Construct a new Button object.
@@ -56,6 +61,13 @@ public:
      * @param scale The initial scale of the button.
      */
     Button(float x, float y, float scale);
+
+    /**
+     * @brief Return the bounds of the button.
+     * 
+     * @return sf::FloatRect The area that the button occupies.
+     */
+    sf::FloatRect getGlobalBounds();
 
     /**
      * @brief Destroy the Button object
