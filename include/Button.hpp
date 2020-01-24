@@ -2,6 +2,7 @@
 #define _BUTTON_HPP_
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 
 class Button : public sf::Drawable, public sf::Transformable
 {
@@ -16,6 +17,16 @@ private:
      * This is basically the shape of the button.
      */
     sf::Sprite* sprite;
+
+    /**
+     * @brief The font of the text of the button.
+     */
+    sf::Font* textFont;
+
+    /**
+     * @brief The text of the button.
+     */
+    sf::Text* text;
 
     /**
      * @brief Called when we want to draw the button.
@@ -39,6 +50,11 @@ private:
      * @brief Set the sprite origin to the middle of the button.
      */
     void setSpriteOriginToMiddle();
+
+    /**
+     * @brief Set the Text Origin To Middle.
+     */
+    void setTextOriginToMiddle();
 
 public:
     /**
@@ -77,6 +93,16 @@ public:
      * @return false If it's not.
      */
     bool contains(const sf::Vector2f& position) const;
+
+    ////////////////////////////////////////////////////////////////
+    // Getters and Setters
+    ////////////////////////////////////////////////////////////////
+
+    sf::Texture* getTexture();
+    void setTexture(sf::Texture*);
+
+    sf::Text* getText();
+    void setText(sf::Text*);
 };
 
 #endif
