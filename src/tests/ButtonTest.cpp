@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cmath>
 #include "Button.hpp"
 
 int main()
@@ -11,7 +12,7 @@ int main()
     Button button2(100.f, 200.f);
 
     sf::Time current = sf::microseconds(0.f);
-    sf::Time totalTime = sf::microseconds(1000000.f);
+    sf::Time totalTime = sf::microseconds(100000.f);
     sf::Time switchTime = sf::microseconds(500.f);
     sf::Time frameTime = sf::microseconds(0.f);
     bool animationEnded = true;
@@ -39,13 +40,8 @@ int main()
                         {
                             animationEnded = false;
                         }
-                        std::cout << "Button 1 pressed!" << std::endl;
-                        sf::Vector2f buttonBounds = button.getOrigin();
-                        std::cout << "Origin: " << buttonBounds.x << ", " << buttonBounds.y << std::endl;
-                        sf::Vector2f buttonPosition = button.getPosition();
-                        std::cout << "Position: " << buttonPosition.x << ", " << buttonPosition.y << std::endl;
+                        std::cout << "Button 1 pressed" << std::endl;
                     }
-                    
                 }
                 break;
             
@@ -65,15 +61,8 @@ int main()
             }
             else if (current >= switchTime)
             {
-                float scale;
-                if (current < totalTime/2.f)
-                {
-                    scale = 1.f - (current / (totalTime/2.f))/2.f;
-                }
-                else
-                {
-                    scale = 0.5f + (current / totalTime) / 2.f;
-                }
+                float normalized = current/totalTime;
+                float scale = pow(normalized/2 - 0.3, 2) + 0.9;
                 button.setScale(scale, scale);
             }
         }

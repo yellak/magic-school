@@ -69,7 +69,14 @@ public:
 
     void update();
 
-    bool contains(const sf::Vector2f& mousePosition) const;
+    /**
+     * @brief Return if the button has the position provided or not.
+     * 
+     * @param position The position that is going to be checked.
+     * @return true If the position is inside the button.
+     * @return false If it's not.
+     */
+    bool contains(const sf::Vector2f& position) const;
 };
 
 #endif

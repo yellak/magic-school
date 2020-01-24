@@ -28,8 +28,8 @@ void Button::loadSprite()
     sprite = new sf::Sprite();
     sprite->setTexture(*texture);
     setSpriteOriginToMiddle();
-    setOrigin(sprite->getOrigin());
     sprite->setPosition(sprite->getOrigin());
+    setOrigin(sprite->getOrigin());
     setPosition(sprite->getPosition());
 }
 
@@ -56,7 +56,7 @@ void Button::update()
 {
 }
 
-bool Button::contains(const sf::Vector2f& mousePosition) const
+bool Button::contains(const sf::Vector2f& position) const
 {
-    return getTransform().transformRect(sprite->getGlobalBounds()).contains(mousePosition);
+    return getTransform().transformRect(sprite->getGlobalBounds()).contains(position);
 }
