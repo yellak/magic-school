@@ -32,12 +32,8 @@ private:
 
     /**
      * @brief Load the sprite of the button with the texture.
-     * 
-     * @param x The x position of the sprite.
-     * @param y The y position of the sprite.
-     * @param scale The initial scale of the sprite.
      */
-    void loadSprite(float x, float y, float scale);
+    void loadSprite();
 
     /**
      * @brief Set the sprite origin to the middle of the button.
@@ -48,19 +44,16 @@ public:
     /**
      * @brief Construct a new Button object.
      * The Button made has position x = 0 and y = 0.
-     * 
-     * @param scale The initial scale of the button.
      */
-    Button(float scale);
+    Button();
 
     /**
      * @brief Construct a new Button object.
      * 
      * @param x The x position of the button.
      * @param y The y position of the button.
-     * @param scale The initial scale of the button.
      */
-    Button(float x, float y, float scale);
+    Button(float x, float y);
 
     /**
      * @brief Return the bounds of the button.
@@ -73,6 +66,10 @@ public:
      * @brief Destroy the Button object
      */
     ~Button();
+
+    void update();
+
+    bool contains(const sf::Vector2f& mousePosition) const;
 };
 
 #endif

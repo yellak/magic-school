@@ -1,13 +1,14 @@
 #include "Button.hpp"
 
-Button::Button(float scale) : Button(0.f, 0.f, scale)
+Button::Button() : Button(0.f, 0.f)
 {
 }
 
-Button::Button(float x, float y, float scale)
+Button::Button(float x, float y)
 {
     loadTexture();
-    loadSprite(x, y, scale);
+    loadSprite();
+    move(x, y);
 }
 
 Button::~Button()
@@ -22,15 +23,14 @@ void Button::loadTexture()
     texture->loadFromFile("assets/textures/defaultButton.png");
 }
 
-void Button::loadSprite(float x, float y, float scale)
+void Button::loadSprite()
 {
     sprite = new sf::Sprite();
     sprite->setTexture(*texture);
-
     setSpriteOriginToMiddle();
-
-    sprite->setPosition(x, y);
-    sprite->setScale(scale, scale);
+    setOrigin(sprite->getOrigin());
+    sprite->setPosition(sprite->getOrigin());
+    setPosition(sprite->getPosition());
 }
 
 void Button::setSpriteOriginToMiddle()
@@ -50,4 +50,13 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
     target.draw(*sprite, states);
+}
+
+void Button::update()
+{
+}
+
+bool Button::contains(const sf::Vector2f& mousePosition) const
+{
+    return getTransform().transformRect(sprite->getGlobalBounds()).contains(mousePosition);
 }

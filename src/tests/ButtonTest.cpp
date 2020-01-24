@@ -7,11 +7,11 @@ int main()
     sf::RenderWindow window;
     window.create(sf::VideoMode(500, 500), "Button Test");
 
-    Button button(100.f, 100.f, 0.2);
-    Button button2(100.f, 200.f, 0.2);
+    Button button(100.f, 100.f);
+    Button button2(100.f, 200.f);
 
     sf::Time current = sf::microseconds(0.f);
-    sf::Time totalTime = sf::microseconds(100000.f);
+    sf::Time totalTime = sf::microseconds(1000000.f);
     sf::Time switchTime = sf::microseconds(500.f);
     sf::Time frameTime = sf::microseconds(0.f);
     bool animationEnded = true;
@@ -32,14 +32,18 @@ int main()
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2f mousePosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-                    if (button.getGlobalBounds().contains(mousePosition))
+                    sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+                    if (button.contains(mousePosition))
                     {
                         if (animationEnded)
                         {
                             animationEnded = false;
                         }
                         std::cout << "Button 1 pressed!" << std::endl;
+                        sf::Vector2f buttonBounds = button.getOrigin();
+                        std::cout << "Origin: " << buttonBounds.x << ", " << buttonBounds.y << std::endl;
+                        sf::Vector2f buttonPosition = button.getPosition();
+                        std::cout << "Position: " << buttonPosition.x << ", " << buttonPosition.y << std::endl;
                     }
                     
                 }
@@ -73,7 +77,6 @@ int main()
                 button.setScale(scale, scale);
             }
         }
-        
         
         window.clear(sf::Color::Black);
         window.draw(button);
