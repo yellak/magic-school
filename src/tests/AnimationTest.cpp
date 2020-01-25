@@ -41,7 +41,7 @@ int main()
                 {
                     if (animation.isEnded())
                     {
-                        animation.setEnded(false);
+                        animation.start();
                     }
                 }
                 break;
@@ -57,7 +57,7 @@ int main()
             if (animation.getCurrent() >= animation.getTotalTime())
             {
                 animation.setCurrent(sf::microseconds(0.f));
-                animation.setEnded(true);
+                animation.end();
                 text->setPosition(0.f, 0.f);
             }
             else if (animation.getCurrent() >= animation.getSwitchTime())

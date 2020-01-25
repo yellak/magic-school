@@ -39,6 +39,16 @@ void Animation::onSwitchTime()
 {
 }
 
+void Animation::start()
+{
+    this->ended = false;
+}
+
+void Animation::end()
+{
+    this->ended = true;
+}
+
 void Animation::setTotalTime(sf::Time totalTime)
 {
     this->totalTime = totalTime;
@@ -67,9 +77,4 @@ void Animation::setCurrent(sf::Time current)
 bool Animation::isEnded()
 {
     return ended;
-}
-
-void Animation::setEnded(bool ended)
-{
-    this->ended = ended;
 }

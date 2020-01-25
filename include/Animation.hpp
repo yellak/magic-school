@@ -10,6 +10,9 @@ public:
 
     void update(sf::Time);
 
+    void start();
+    void end();
+
     ///////////////////////////////////////////////////
     // Getter and setters
     ///////////////////////////////////////////////////
@@ -24,7 +27,6 @@ public:
     void setCurrent(sf::Time);
 
     bool isEnded();
-    void setEnded(bool);
 
 private:
     /**
