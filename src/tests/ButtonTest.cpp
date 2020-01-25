@@ -3,13 +3,35 @@
 #include <cmath>
 #include "Button.hpp"
 
+sf::Texture* loadTexture()
+{
+    auto texture = new sf::Texture();
+    texture->loadFromFile("assets/textures/defaultButton.png");
+    return texture;
+}
+
+sf::Text* loadText()
+{
+    auto font = new sf::Font();
+    font->loadFromFile("assets/fonts/Ubuntu-M.ttf");
+    auto text = new sf::Text();
+    text->setFont(*font);
+    text->setCharacterSize(20);
+    text->setString(L"Kálley");
+    text->setFillColor(sf::Color::Red);
+    return text;
+}
+
 int main()
 {
     sf::RenderWindow window;
     window.create(sf::VideoMode(500, 500), "Button Test");
 
-    Button button(100.f, 100.f);
-    Button button2(100.f, 200.f);
+    Button button;
+
+    button.setTexture(loadTexture());
+    button.move(100.f, 100.f);
+    button.setText(loadText());
 
     sf::Time current = sf::microseconds(0.f);
     sf::Time totalTime = sf::microseconds(100000.f);
@@ -69,7 +91,6 @@ int main()
         
         window.clear(sf::Color::Black);
         window.draw(button);
-        window.draw(button2);
         window.display();
     }
     

@@ -20,11 +20,6 @@ private:
     sf::Sprite* sprite;
 
     /**
-     * @brief The font of the text of the button.
-     */
-    sf::Font* textFont;
-
-    /**
      * @brief The text of the button.
      */
     sf::Text* text;
@@ -65,14 +60,6 @@ public:
     Button();
 
     /**
-     * @brief Construct a new Button object.
-     * 
-     * @param x The x position of the button.
-     * @param y The y position of the button.
-     */
-    Button(float x, float y);
-
-    /**
      * @brief Return the bounds of the button.
      * 
      * @return sf::FloatRect The area that the button occupies.
@@ -83,8 +70,6 @@ public:
      * @brief Destroy the Button object
      */
     ~Button();
-
-    void update();
 
     /**
      * @brief Return if the button has the position provided or not.
