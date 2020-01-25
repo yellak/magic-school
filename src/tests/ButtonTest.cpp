@@ -78,8 +78,8 @@ int main()
             if (current >= totalTime)
             {
                 current = sf::microseconds(0.f);
-                button.setScale(1.f, 1.f);
                 animationEnded = true;
+                button.setScale(1.f, 1.f);
             }
             else if (current >= switchTime)
             {
