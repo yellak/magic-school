@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Animation.hpp"
+#include "TransformAnimation.hpp"
 
 sf::Text* loadText()
 {
@@ -18,9 +19,20 @@ int main()
     sf::RenderWindow window;
     window.create(sf::VideoMode(500, 500), "Animation Test");
 
-    Animation animation(sf::seconds(0.5f), sf::seconds(0.05));
-
     sf::Text* text = loadText();
+    TransformAnimation animation(sf::seconds(0.5f), sf::seconds(0.05));
+
+    // Config of the animation
+    auto endMethod = [&] () {
+        text->setPosition(0.f, 0.f);
+    };
+
+    auto switchMethod = [&] () {
+        text->move(0.09f, 0);
+    };
+
+    animation.setSwitchMethod(switchMethod);
+    animation.setEndMethod(endMethod);
 
     sf::Time frameTime = sf::microseconds(0.f);
     sf::Clock frameClock;
@@ -51,20 +63,7 @@ int main()
             }
         }
 
-        if (!animation.isEnded())
-        {
-            animation.setCurrent(animation.getCurrent() + frameTime);
-            if (animation.getCurrent() >= animation.getTotalTime())
-            {
-                animation.setCurrent(sf::microseconds(0.f));
-                animation.end();
-                text->setPosition(0.f, 0.f);
-            }
-            else if (animation.getCurrent() >= animation.getSwitchTime())
-            {
-                text->move(0.09f, 0);
-            }
-        }
+        animation.update(frameTime);
 
         window.clear(sf::Color::Black);
         window.draw(*text);

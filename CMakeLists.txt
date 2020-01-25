@@ -18,7 +18,7 @@ target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
 add_executable(ButtonTest "src/tests/ButtonTest.cpp" "src/Button.cpp")
 target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
 
-add_executable(AnimationTest "src/tests/AnimationTest.cpp" "src/Animation.cpp")
+add_executable(AnimationTest "src/tests/AnimationTest.cpp" "src/Animation.cpp" "src/TransformAnimation.cpp")
 target_link_libraries(AnimationTest "${SFML_LIBRARIES}")
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

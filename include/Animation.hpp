@@ -50,8 +50,18 @@ private:
     bool ended;
 
 protected:
+    /**
+     * @brief What to do in the end of the animation.
+     * Defines what has to be done when the total time
+     * of the animation has passed.
+     */
     virtual void onTotalTime();
 
+    /**
+     * @brief What to do on switch time.
+     * Defines what has to be done when the time
+     * to switch action has passed.
+     */
     virtual void onSwitchTime();
 };
 
