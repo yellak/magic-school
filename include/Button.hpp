@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include "Util.hpp"
 
 class Button : public sf::Drawable, public sf::Transformable
 {

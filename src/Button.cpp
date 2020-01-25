@@ -16,7 +16,7 @@ Button::Button(float x, float y)
     text->setCharacterSize(20);
     text->setString(L"Kálley");
     text->setFillColor(sf::Color::Red);
-    setTextOriginToMiddle();
+    Util::Transform::centreOrigin(*text);
     text->setPosition(sprite->getPosition());
     move(x, y);
 }
@@ -38,26 +38,10 @@ void Button::loadSprite()
 {
     sprite = new sf::Sprite();
     sprite->setTexture(*texture);
-    setSpriteOriginToMiddle();
+    Util::Transform::centreOrigin(*sprite);
     sprite->setPosition(sprite->getOrigin());
     setOrigin(sprite->getOrigin());
     setPosition(sprite->getPosition());
-}
-
-void Button::setSpriteOriginToMiddle()
-{
-    sf::FloatRect localBounds = sprite->getLocalBounds();
-    float origin_x = floor(localBounds.width/2.f);
-    float origin_y = floor(localBounds.height/2.f);
-    sprite->setOrigin(origin_x, origin_y);
-}
-
-void Button::setTextOriginToMiddle()
-{
-    sf::FloatRect localBounds = text->getLocalBounds();
-    float origin_x = localBounds.width/2.f;
-    float origin_y = localBounds.height/2.f;
-    text->setOrigin(floor(origin_x),floor(origin_y));
 }
 
 sf::FloatRect Button::getGlobalBounds()
