@@ -8,11 +8,6 @@ switchTime(switchTime)
     ended = true;
 }
 
-sf::Time Animation::getTotalTime()
-{
-    return totalTime;
-}
-
 void Animation::update(sf::Time frameTime)
 {
     if (!ended)
@@ -47,6 +42,11 @@ void Animation::start()
 void Animation::end()
 {
     this->ended = true;
+}
+
+sf::Time Animation::getTotalTime()
+{
+    return totalTime;
 }
 
 void Animation::setTotalTime(sf::Time totalTime)

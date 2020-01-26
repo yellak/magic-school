@@ -2,13 +2,35 @@
 
 Button::Button()
 {
+    text = NULL;
     sprite = new sf::Sprite();
     loadSprite();
+
+    click = new TransformAnimation(sf::seconds(0.3f), sf::seconds(0.002));
+    auto endMethod = [this] () {
+        setScale(1.f, 1.f);
+    };
+
+    auto switchMethod = [this] () {
+        float normalized = click->getCurrent()/click->getTotalTime();
+        float scale = pow(normalized/2 - 0.3, 2) + 0.9;
+        setScale(scale, scale);
+    };
+
+    click->setSwitchMethod(switchMethod);
+    click->setEndMethod(endMethod);
 }
 
 Button::~Button()
 {
-    delete sprite;
+    if (sprite != NULL)
+    {
+        delete sprite;
+    }
+    if (click != NULL)
+    {
+        delete click;
+    }
 }
 
 void Button::loadSprite()
@@ -61,4 +83,9 @@ void Button::setText(sf::Text* text)
     this->text = text;
     Util::Transform::centreOrigin(*text);
     text->setPosition(sprite->getPosition());
+}
+
+TransformAnimation* Button::getClickAnimation()
+{
+    return click;
 }

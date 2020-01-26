@@ -20,7 +20,7 @@ int main()
     window.create(sf::VideoMode(500, 500), "Animation Test");
 
     sf::Text* text = loadText();
-    TransformAnimation animation(sf::seconds(0.5f), sf::seconds(0.05));
+    TransformAnimation animation(sf::seconds(0.5f), sf::seconds(0.05f));
 
     // Config of the animation
     auto endMethod = [&] () {

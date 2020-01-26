@@ -2,8 +2,9 @@
 #define _BUTTON_HPP_
 
 #include <SFML/Graphics.hpp>
-#include <cmath>
+#include <functional>
 #include "Util.hpp"
+#include "TransformAnimation.hpp"
 
 class Button : public sf::Drawable, public sf::Transformable
 {
@@ -23,6 +24,11 @@ private:
      * @brief The text of the button.
      */
     sf::Text* text;
+
+    /**
+     * @brief The click animation of the button
+     */
+    TransformAnimation* click;
 
     /**
      * @brief Called when we want to draw the button.
@@ -89,6 +95,8 @@ public:
 
     sf::Text* getText();
     void setText(sf::Text*);
+
+    TransformAnimation* getClickAnimation();
 };
 
 #endif

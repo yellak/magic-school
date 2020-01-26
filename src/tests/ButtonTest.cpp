@@ -31,18 +31,13 @@ int main()
 
     button.setTexture(loadTexture());
     button.move(100.f, 100.f);
-    button.setText(loadText());
-
-    sf::Time current = sf::microseconds(0.f);
-    sf::Time totalTime = sf::microseconds(100000.f);
-    sf::Time switchTime = sf::microseconds(500.f);
+    //button.setText(loadText());
     sf::Time frameTime = sf::microseconds(0.f);
-    bool animationEnded = true;
 
     sf::Clock clock;
     while (window.isOpen())
     {
-        frameTime = sf::microseconds(clock.restart().asMicroseconds());
+        frameTime = clock.restart();
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -58,9 +53,9 @@ int main()
                     sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
                     if (button.contains(mousePosition))
                     {
-                        if (animationEnded)
+                        if (button.getClickAnimation()->isEnded())
                         {
-                            animationEnded = false;
+                            button.getClickAnimation()->start();
                         }
                         std::cout << "Button 1 pressed" << std::endl;
                     }
@@ -72,22 +67,7 @@ int main()
             }
         }
 
-        if (!animationEnded)
-        {
-            current += frameTime;
-            if (current >= totalTime)
-            {
-                current = sf::microseconds(0.f);
-                animationEnded = true;
-                button.setScale(1.f, 1.f);
-            }
-            else if (current >= switchTime)
-            {
-                float normalized = current/totalTime;
-                float scale = pow(normalized/2 - 0.3, 2) + 0.9;
-                button.setScale(scale, scale);
-            }
-        }
+        button.getClickAnimation()->update(frameTime);
         
         window.clear(sf::Color::Black);
         window.draw(button);
