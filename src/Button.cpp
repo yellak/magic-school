@@ -1,12 +1,16 @@
 #include "Button.hpp"
 
-Button::Button()
+Button::Button() : Button(sf::seconds(0.1f), sf::seconds(0.002))
+{
+}
+
+Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime)
 {
     text = NULL;
     sprite = new sf::Sprite();
     loadSprite();
 
-    click = new TransformAnimation(sf::seconds(0.3f), sf::seconds(0.002));
+    click = new TransformAnimation(totalAnimationTime, switchAnimantionTime);
     auto endMethod = [this] () {
         setScale(1.f, 1.f);
     };

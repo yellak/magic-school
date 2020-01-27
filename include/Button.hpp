@@ -6,6 +6,16 @@
 #include "Util.hpp"
 #include "TransformAnimation.hpp"
 
+/**
+ * @brief Button class.
+ * This class is used to create a new button to the game. The button
+ * has a sprite with a texture that can be provided outside, e.g., you
+ * can create your own form button. The button does not have a flexible
+ * bounding box, it means that the button will always have a squared bounding
+ * box even if the texture isn't squared.
+ * The button has to have a texture, if it does not, it won't work
+ * properly.
+ */
 class Button : public sf::Drawable, public sf::Transformable
 {
 private:
@@ -64,6 +74,14 @@ public:
      * The Button made has position x = 0 and y = 0.
      */
     Button();
+
+    /**
+     * @brief Construct a new Button object.
+     * 
+     * @param totalAnimationTime The time that the click animation will take.
+     * @param switchAnimantioTime The between switch states of the animation.
+     */
+    Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime);
 
     /**
      * @brief Return the bounds of the button.
