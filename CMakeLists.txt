@@ -10,7 +10,7 @@ enable_testing()
 
 set(SFML_LIBRARIES "sfml-graphics" "sfml-window" "sfml-system")
 
-set(MAIN_SOURCES "src/main.cpp" "src/Game.cpp")
+set(MAIN_SOURCES "src/main.cpp" "src/Game.cpp" "src/Button.cpp" "src/TransformAnimation.cpp" "src/Animation.cpp")
 
 add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
 target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")

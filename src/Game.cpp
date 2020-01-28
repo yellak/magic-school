@@ -16,8 +16,16 @@ Game::~Game()
 
 void Game::play()
 {
+    // TODO Bring this to other place other than here
+    Button* button = new Button();
+    auto texture = new sf::Texture();
+    texture->loadFromFile("assets/textures/defaultButton.png");
+    button->setTexture(texture);
+
+    clock.restart();
     while (gameWindow->isOpen())
     {
+        frameTime = clock.restart();
         while (gameWindow->pollEvent(*event))
         {
             switch (event->type)
@@ -26,12 +34,23 @@ void Game::play()
                 gameWindow->close();
                 break;
             
+            case sf::Event::MouseButtonPressed:
+                if (event->mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2f mousePosition(sf::Mouse::getPosition(*gameWindow).x, sf::Mouse::getPosition(*gameWindow).y);
+                    button->click(mousePosition);
+                }
+                break;
+            
             default:
                 break;
             }
         }
+
+        button->update(frameTime);
         
         gameWindow->clear(sf::Color::Black);
+        gameWindow->draw(*button);
         gameWindow->display();
     }
 }

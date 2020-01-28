@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Button.hpp"
 
 class Game
 {
@@ -14,6 +15,16 @@ private:
      * @brief The event object of the whole game.
      */
     sf::Event* event;
+
+    /**
+     * @brief The clock that will control the whole aplication.
+     */
+    sf::Clock clock;
+
+    /**
+     * @brief The time that the main loop takes to be excuted.
+     */
+    sf::Time frameTime;
 
 public:
 

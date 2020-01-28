@@ -38,7 +38,7 @@ private:
     /**
      * @brief The click animation of the button
      */
-    TransformAnimation* click;
+    TransformAnimation* clickAnimation;
 
     /**
      * @brief Called when we want to draw the button.
@@ -103,6 +103,19 @@ public:
      * @return false If it's not.
      */
     bool contains(const sf::Vector2f& position) const;
+
+    /**
+     * @brief Update the state of the button.
+     * 
+     * @param frameTime The time of a frame defined by the main loop.
+     */
+    void update(sf::Time frameTime);
+
+    /**
+     * @brief Start the click animation.
+     * The animation isn't going to start if the animation is not ended.
+     */
+    void click(sf::Vector2f mousePosition);
 
     ////////////////////////////////////////////////////////////////
     // Getters and Setters

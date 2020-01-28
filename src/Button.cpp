@@ -10,19 +10,19 @@ Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime)
     sprite = new sf::Sprite();
     loadSprite();
 
-    click = new TransformAnimation(totalAnimationTime, switchAnimantionTime);
+    clickAnimation = new TransformAnimation(totalAnimationTime, switchAnimantionTime);
     auto endMethod = [this] () {
         setScale(1.f, 1.f);
     };
 
     auto switchMethod = [this] () {
-        float normalized = click->getCurrent()/click->getTotalTime();
+        float normalized = clickAnimation->getCurrent()/clickAnimation->getTotalTime();
         float scale = pow(normalized/2 - 0.3, 2) + 0.9;
         setScale(scale, scale);
     };
 
-    click->setSwitchMethod(switchMethod);
-    click->setEndMethod(endMethod);
+    clickAnimation->setSwitchMethod(switchMethod);
+    clickAnimation->setEndMethod(endMethod);
 }
 
 Button::~Button()
@@ -31,9 +31,25 @@ Button::~Button()
     {
         delete sprite;
     }
-    if (click != NULL)
+    if (clickAnimation != NULL)
     {
-        delete click;
+        delete clickAnimation;
+    }
+}
+
+void Button::update(sf::Time frameTime)
+{
+    clickAnimation->update(frameTime);
+}
+
+void Button::click(sf::Vector2f mousePosition)
+{
+    if (contains(mousePosition))
+    {
+        if (clickAnimation->isEnded())
+        {
+            clickAnimation->start();
+        }
     }
 }
 
@@ -91,5 +107,5 @@ void Button::setText(sf::Text* text)
 
 TransformAnimation* Button::getClickAnimation()
 {
-    return click;
+    return clickAnimation;
 }
