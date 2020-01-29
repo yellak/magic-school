@@ -26,10 +26,10 @@ void Game::play()
     font->loadFromFile("assets/fonts/Ubuntu-M.ttf");
     auto text = new sf::Text();
     text->setFont(*font);
-    text->setCharacterSize(20);
-    text->setString("Start!");
     text->setFillColor(sf::Color::Black);
     button->setText(*text);
+    button->setString("Start!");
+    button->setCharacterSize(20);
 
     sf::Vector2f newButtonPosition(gameWindow->getSize().x/2, gameWindow->getSize().y/2);
     button->setPosition(newButtonPosition);
@@ -61,7 +61,7 @@ void Game::play()
 
         button->update(frameTime);
         
-        gameWindow->clear(sf::Color::Black);
+        gameWindow->clear(sf::Color(148, 0, 211));
         gameWindow->draw(*button);
         gameWindow->display();
     }

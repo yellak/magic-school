@@ -68,6 +68,18 @@ void Button::setTexture(const sf::Texture& texture)
     Util::Transform::centreOrigin(sprite);
 }
 
+void Button::setString(const sf::String& string)
+{
+    text.setString(string);
+    Util::Transform::centreOrigin(text);
+}
+
+void Button::setCharacterSize(unsigned int size)
+{
+    text.setCharacterSize(size);
+    Util::Transform::centreOrigin(text);
+}
+
 sf::Text Button::getText()
 {
     return text;

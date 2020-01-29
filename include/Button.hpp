@@ -9,7 +9,7 @@
 /**
  * @brief Button class.
  * This class is used to create a new button to the game. The button
- * has a sprite with a texture that can be provided outside, e.g., you
+ * has a sprite with a texture that has to be provided outside, e.g. you
  * can create your own form button. The button does not have a flexible
  * bounding box, it means that the button will always have a squared bounding
  * box even if the texture isn't squared.
@@ -18,46 +18,6 @@
  */
 class Button : public sf::Drawable, public sf::Transformable
 {
-private:
-    /**
-     * @brief The sprite of the button.
-     * This is basically the shape of the button.
-     */
-    sf::Sprite sprite;
-
-    /**
-     * @brief The text of the button.
-     */
-    sf::Text text;
-
-    /**
-     * @brief The click animation of the button
-     */
-    TransformAnimation* clickAnimation;
-
-    /**
-     * @brief Called when we want to draw the button.
-     * 
-     * @param target The window where the button is going to be drawn.
-     * @param states The state object that specifies the next state of the button.
-     */
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-    /**
-     * @brief Load the texture of the button.
-     */
-    void loadTexture();
-
-    /**
-     * @brief Set the sprite origin to the middle of the button.
-     */
-    void setSpriteOriginToMiddle();
-
-    /**
-     * @brief Set the Text Origin To Middle.
-     */
-    void setTextOriginToMiddle();
-
 public:
     /**
      * @brief Construct a new Button object.
@@ -107,6 +67,20 @@ public:
      */
     void click(const sf::Vector2f mousePosition);
 
+    /**
+     * @brief Set the String of the text of the button.
+     * 
+     * @param string The new text String.
+     */
+    void setString(const sf::String& string);
+
+    /**
+     * @brief Set the Character Size of the text.
+     * 
+     * @param size The new size of the text.
+     */
+    void setCharacterSize(unsigned int size);
+
     ////////////////////////////////////////////////////////////////
     // Getters and Setters
     ////////////////////////////////////////////////////////////////
@@ -117,6 +91,46 @@ public:
     void setText(const sf::Text&);
 
     TransformAnimation* getClickAnimation();
+
+private:
+    /**
+     * @brief The sprite of the button.
+     * This is basically the shape of the button.
+     */
+    sf::Sprite sprite;
+
+    /**
+     * @brief The text of the button.
+     */
+    sf::Text text;
+
+    /**
+     * @brief The click animation of the button
+     */
+    TransformAnimation* clickAnimation;
+
+    /**
+     * @brief Called when we want to draw the button.
+     * 
+     * @param target The window where the button is going to be drawn.
+     * @param states The state object that specifies the next state of the button.
+     */
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+    /**
+     * @brief Load the texture of the button.
+     */
+    void loadTexture();
+
+    /**
+     * @brief Set the sprite origin to the middle of the button.
+     */
+    void setSpriteOriginToMiddle();
+
+    /**
+     * @brief Set the Text Origin To Middle.
+     */
+    void setTextOriginToMiddle();
 };
 
 #endif
