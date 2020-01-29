@@ -20,20 +20,15 @@ class Button : public sf::Drawable, public sf::Transformable
 {
 private:
     /**
-     * @brief The texture of the button.
-     */
-    sf::Texture* texture;
-
-    /**
      * @brief The sprite of the button.
      * This is basically the shape of the button.
      */
-    sf::Sprite* sprite;
+    sf::Sprite sprite;
 
     /**
      * @brief The text of the button.
      */
-    sf::Text* text;
+    sf::Text text;
 
     /**
      * @brief The click animation of the button
@@ -52,11 +47,6 @@ private:
      * @brief Load the texture of the button.
      */
     void loadTexture();
-
-    /**
-     * @brief Load the sprite of the button with the texture.
-     */
-    void loadSprite();
 
     /**
      * @brief Set the sprite origin to the middle of the button.
@@ -109,23 +99,22 @@ public:
      * 
      * @param frameTime The time of a frame defined by the main loop.
      */
-    void update(sf::Time frameTime);
+    void update(const sf::Time frameTime);
 
     /**
      * @brief Start the click animation.
      * The animation isn't going to start if the animation is not ended.
      */
-    void click(sf::Vector2f mousePosition);
+    void click(const sf::Vector2f mousePosition);
 
     ////////////////////////////////////////////////////////////////
     // Getters and Setters
     ////////////////////////////////////////////////////////////////
 
-    sf::Texture* getTexture();
-    void setTexture(sf::Texture*);
+    void setTexture(const sf::Texture&);
 
-    sf::Text* getText();
-    void setText(sf::Text*);
+    sf::Text getText();
+    void setText(const sf::Text&);
 
     TransformAnimation* getClickAnimation();
 };

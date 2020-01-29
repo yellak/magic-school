@@ -15,11 +15,11 @@ namespace Util
          * @param entity The entity that is going to have the center 
          */
         template <class Transformable>
-        void centreOrigin(Transformable& entity)
+        static inline void centreOrigin(Transformable& entity)
         {
             sf::FloatRect bounds = entity.getLocalBounds();
-            float x = bounds.width/2.f;
-            float y = bounds.height/2.f;
+            float x = bounds.left + bounds.width/2.f;
+            float y = bounds.top + bounds.height/2.f;
             entity.setOrigin(std::floor(x), std::floor(y));
         }
     }

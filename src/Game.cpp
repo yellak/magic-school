@@ -16,11 +16,23 @@ Game::~Game()
 
 void Game::play()
 {
-    // TODO Bring this to other place other than here
+    // TODO Take this to other place other than here
     Button* button = new Button();
     auto texture = new sf::Texture();
     texture->loadFromFile("assets/textures/defaultButton.png");
-    button->setTexture(texture);
+    button->setTexture(*texture);
+
+    auto font = new sf::Font();
+    font->loadFromFile("assets/fonts/Ubuntu-M.ttf");
+    auto text = new sf::Text();
+    text->setFont(*font);
+    text->setCharacterSize(20);
+    text->setString("Start!");
+    text->setFillColor(sf::Color::Black);
+    button->setText(*text);
+
+    sf::Vector2f newButtonPosition(gameWindow->getSize().x/2, gameWindow->getSize().y/2);
+    button->setPosition(newButtonPosition);
 
     clock.restart();
     while (gameWindow->isOpen())

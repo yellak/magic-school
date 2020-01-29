@@ -29,9 +29,9 @@ int main()
 
     Button button;
 
-    button.setTexture(loadTexture());
+    button.setTexture(*loadTexture());
     button.move(100.f, 100.f);
-    button.setText(loadText());
+    button.setText(*loadText());
     sf::Time frameTime = sf::microseconds(0.f);
 
     sf::Clock clock;
