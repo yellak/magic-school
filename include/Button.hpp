@@ -5,6 +5,7 @@
 #include <functional>
 #include "Util.hpp"
 #include "TransformAnimation.hpp"
+#include "State.hpp"
 
 /**
  * @brief Button class.
@@ -59,7 +60,8 @@ public:
      * 
      * @param frameTime The time of a frame defined by the main loop.
      */
-    void update(const sf::Time frameTime);
+    void update(const sf::Time& frameTime);
+    void handleEvent(const sf::Event&, const sf::Vector2f&);
 
     /**
      * @brief Start the click animation.
@@ -80,6 +82,7 @@ public:
      * @param size The new size of the text.
      */
     void setCharacterSize(unsigned int size);
+
 
     ////////////////////////////////////////////////////////////////
     // Getters and Setters
@@ -109,6 +112,11 @@ private:
      */
     TransformAnimation* clickAnimation;
 
+    State* standBy;
+    State* clicking;
+    State* current;
+    State* next;
+
     /**
      * @brief Called when we want to draw the button.
      * 
@@ -131,6 +139,9 @@ private:
      * @brief Set the Text Origin To Middle.
      */
     void setTextOriginToMiddle();
+
+    State* standByMethod(const sf::Event&, const sf::Vector2f&);
+    State* clickingMethod(const sf::Event&, const sf::Vector2f&);
 };
 
 #endif

@@ -51,14 +51,8 @@ int main()
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-                    if (button.contains(mousePosition))
-                    {
-                        if (button.getClickAnimation()->isEnded())
-                        {
-                            button.getClickAnimation()->start();
-                        }
-                        std::cout << "Button 1 pressed" << std::endl;
-                    }
+                    button.handleEvent(event, mousePosition);
+                    std::cout << "Click!" << std::endl;
                 }
                 break;
             
@@ -67,7 +61,7 @@ int main()
             }
         }
 
-        button.getClickAnimation()->update(frameTime);
+        button.update(frameTime);
         
         window.clear(sf::Color::Black);
         window.draw(button);
