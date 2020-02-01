@@ -1,3 +1,6 @@
+#ifndef _GAME_HPP_
+#define _GAME_HPP_
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Button.hpp"
@@ -52,3 +55,5 @@ public:
 
     sf::Event* getEvent();
 };
+
+#endif
