@@ -50,7 +50,7 @@ void Game::play()
                 if (event->mouseButton.button == sf::Mouse::Left)
                 {
                     sf::Vector2f mousePosition(sf::Mouse::getPosition(*gameWindow).x, sf::Mouse::getPosition(*gameWindow).y);
-                    button->click(mousePosition);
+                    button->handleEvent(*event, mousePosition);
                 }
                 break;
             
@@ -65,6 +65,11 @@ void Game::play()
         gameWindow->draw(*button);
         gameWindow->display();
     }
+
+    delete button;
+    delete texture;
+    delete font;
+    delete text;
 }
 
 sf::RenderWindow* Game::getGameWindow()

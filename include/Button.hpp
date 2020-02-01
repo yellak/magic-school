@@ -5,7 +5,7 @@
 #include <functional>
 #include "Util.hpp"
 #include "TransformAnimation.hpp"
-#include "State.hpp"
+#include "StateMachine.hpp"
 
 /**
  * @brief Button class.
@@ -35,16 +35,16 @@ public:
     Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime);
 
     /**
+     * @brief Destroy the Button object
+     */
+    ~Button();
+
+    /**
      * @brief Return the bounds of the button.
      * 
      * @return sf::FloatRect The area that the button occupies.
      */
     sf::FloatRect getGlobalBounds();
-
-    /**
-     * @brief Destroy the Button object
-     */
-    ~Button();
 
     /**
      * @brief Return if the button has the position provided or not.
@@ -61,13 +61,14 @@ public:
      * @param frameTime The time of a frame defined by the main loop.
      */
     void update(const sf::Time& frameTime);
-    void handleEvent(const sf::Event&, const sf::Vector2f&);
 
     /**
-     * @brief Start the click animation.
-     * The animation isn't going to start if the animation is not ended.
+     * @brief Handle an event coming from outside.
+     * 
+     * @param event The event initialized ouside of the Button.
+     * @param mousePosition The mouse position relatively to the window where the Button is within.
      */
-    void click(const sf::Vector2f mousePosition);
+    void handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition);
 
     /**
      * @brief Set the String of the text of the button.
@@ -85,21 +86,42 @@ public:
 
 
     ////////////////////////////////////////////////////////////////
+    // Public attributes
+    ////////////////////////////////////////////////////////////////
+
+    /**
+     * @brief StandBy State of the Button.
+     * In this state, the button is quiet, it's
+     * doing nothing, neither clicking or jumping.
+     */
+    State* standBy;
+
+    /**
+     * @brief Clicking state of the Button.
+     * In this state, the is running the click
+     * animation. When the animation ends the button
+     * stops clicking.
+     */
+    State* clicking;
+
+    ////////////////////////////////////////////////////////////////
     // Getters and Setters
     ////////////////////////////////////////////////////////////////
 
     void setTexture(const sf::Texture&);
 
-    sf::Text getText();
+    sf::Text& getText();
     void setText(const sf::Text&);
 
-    TransformAnimation* getClickAnimation();
+    TransformAnimation& getClickAnimation();
 
-    State* standBy;
-    State* clicking;
-    State* current;
-    State* next;
+
 private:
+    /**
+     * @brief Control the state handling of the Button.
+     */
+    StateMachine* state;
+
     /**
      * @brief The sprite of the button.
      * This is basically the shape of the button.
@@ -114,7 +136,7 @@ private:
     /**
      * @brief The click animation of the button
      */
-    TransformAnimation* clickAnimation;
+    TransformAnimation clickAnimation;
     /**
      * @brief Called when we want to draw the button.
      * 
@@ -139,14 +161,53 @@ private:
     void setTextOriginToMiddle();
 };
 
+/**
+ * @brief General States.
+ * 
+ */
 namespace states
 {
+    /**
+     * @brief Button states.
+     * 
+     */
     namespace button
     {
-        State *standByHandle(Button&, const sf::Event &, const sf::Vector2f &);
-        State *clickingHandle(Button&, const sf::Event &, const sf::Vector2f &);
-        State *standByUpdate(Button&, const sf::Time&);
-        State *clickingUpdate(Button&, const sf::Time&);
+        /**
+         * @brief Defines handleEvent method in the standBy state.
+         * Implements the behaviour of the standBy state for handling
+         * events.
+         * 
+         * @return State* The next state, nullptr if there isn't.
+         */
+        State* standByHandle(Button&, const sf::Event&, const sf::Vector2f&);
+
+        /**
+         * @brief Defines update method in the standBy state.
+         * Implements the behaviour of the standBy state for update
+         * calls.
+         * 
+         * @return State* The next state, nullptr if there isn't.
+         */
+        State* standByUpdate(Button&, const sf::Time&);
+
+        /**
+         * @brief Defines handleEvent method in the clicking state.
+         * Implements the behaviour of the clicking state for handling
+         * events.
+         * 
+         * @return State* The next state, nullptr if there isn't.
+         */
+        State* clickingHandle(Button&, const sf::Event&, const sf::Vector2f&);
+
+        /**
+         * @brief Defines update method in the clicking state.
+         * Implements the behaviour of the clicking state for update
+         * calls.
+         * 
+         * @return State* The next state, nullptr if there isn't.
+         */
+        State* clickingUpdate(Button&, const sf::Time&);
     } // namespace button
 } // namespace states
 

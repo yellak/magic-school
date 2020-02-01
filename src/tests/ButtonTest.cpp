@@ -52,7 +52,6 @@ int main()
                 {
                     sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
                     button.handleEvent(event, mousePosition);
-                    std::cout << "Click!" << std::endl;
                 }
                 break;
             
@@ -67,5 +66,4 @@ int main()
         window.draw(button);
         window.display();
     }
-    
 }

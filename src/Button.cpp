@@ -4,24 +4,24 @@ Button::Button() : Button(sf::seconds(0.1f), sf::seconds(0.002))
 {
 }
 
-Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime)
+Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime):
+clickAnimation(totalAnimationTime, switchAnimantionTime)
 {
-    clickAnimation = new TransformAnimation(totalAnimationTime, switchAnimantionTime);
-
     auto endMethod = [this] () {
         setScale(1.f, 1.f);
     };
 
     auto switchMethod = [this] () {
-        float normalized = clickAnimation->getCurrent()/clickAnimation->getTotalTime();
+        float normalized = clickAnimation.getCurrent()/clickAnimation.getTotalTime();
         float scale = pow(normalized/2 - 0.3, 2) + 0.9;
         setScale(scale, scale);
     };
 
-    clickAnimation->setSwitchMethod(switchMethod);
-    clickAnimation->setEndMethod(endMethod);
+    clickAnimation.setSwitchMethod(switchMethod);
+    clickAnimation.setEndMethod(endMethod);
 
     standBy = new State();
+    state = new StateMachine(standBy);
     standBy->setHandleEvent([this] (const sf::Event& event, const sf::Vector2f& mousePosition) {
         return states::button::standByHandle(*this, event, mousePosition);
     });
@@ -36,46 +36,28 @@ Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime)
     clicking->setUpdate([this] (const sf::Time& frameTime) {
         return states::button::clickingUpdate(*this, frameTime);
     });
-
-    current = standBy;
-    next = nullptr;
 }
 
 Button::~Button()
 {
-    if (clickAnimation != NULL)
+    if (standBy != nullptr)
     {
-        delete clickAnimation;
+        delete standBy;
+    }
+    if (clicking != nullptr)
+    {
+        delete clicking;
     }
 }
 
 void Button::update(const sf::Time& frameTime)
 {
-    next = current->update(frameTime);
-    if (next != nullptr)
-    {
-        current = next;
-    }
+    state->update(frameTime);
 }
 
 void Button::handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition)
 {
-    next = current->handleEvent(event, mousePosition);
-    if (next != nullptr)
-    {
-        current = next;
-    }
-}
-
-void Button::click(const sf::Vector2f mousePosition)
-{
-    if (contains(mousePosition))
-    {
-        if (clickAnimation->isEnded())
-        {
-            clickAnimation->start();
-        }
-    }
+    state->handleEvent(event, mousePosition);
 }
 
 sf::FloatRect Button::getGlobalBounds()
@@ -113,7 +95,7 @@ void Button::setCharacterSize(unsigned int size)
     Util::Transform::centreOrigin(text);
 }
 
-sf::Text Button::getText()
+sf::Text& Button::getText()
 {
     return text;
 }
@@ -124,7 +106,7 @@ void Button::setText(const sf::Text& text)
     Util::Transform::centreOrigin(this->text);
 }
 
-TransformAnimation* Button::getClickAnimation()
+TransformAnimation& Button::getClickAnimation()
 {
     return clickAnimation;
 }
@@ -134,11 +116,10 @@ State* states::button::standByHandle(Button& button, const sf::Event& event, con
     State* next = nullptr;
     if (button.contains(mousePosition))
     {
-        if (button.getClickAnimation()->isEnded())
+        if (button.getClickAnimation().isEnded())
         {
-            button.getClickAnimation()->start();
+            button.getClickAnimation().start();
             next = button.clicking;
-            std::cout << "Button click!" << std::endl;
         }
     }
     return next;
@@ -147,7 +128,7 @@ State* states::button::standByHandle(Button& button, const sf::Event& event, con
 State* states::button::clickingHandle(Button& button, const sf::Event& event, const sf::Vector2f& mousePosition)
 {
     State* next = nullptr;
-    if (button.getClickAnimation()->isEnded())
+    if (button.getClickAnimation().isEnded())
     {
         next = button.standBy;
     }
@@ -161,9 +142,9 @@ State* states::button::standByUpdate(Button& button, const sf::Time& frameTime)
 
 State* states::button::clickingUpdate(Button& button, const sf::Time& frameTime)
 {
-    button.getClickAnimation()->update(frameTime);
+    button.getClickAnimation().update(frameTime);
     State* next = nullptr;
-    if (button.getClickAnimation()->isEnded())
+    if (button.getClickAnimation().isEnded())
     {
         next = button.standBy;
     }

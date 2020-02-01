@@ -16,8 +16,8 @@ set(MAIN_SOURCES "src/main.cpp" "src/Game.cpp" "${SOURCES}")
 
 set(BUTTON_TESTS_SRC "src/tests/ButtonTest.cpp" "${SOURCES}")
 
-#add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
-#target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
+add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
+target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
 
 add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
 target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
