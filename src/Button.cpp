@@ -23,24 +23,18 @@ Button::Button(sf::Time totalAnimationTime, sf::Time switchAnimantionTime)
 
     standBy = new State();
     standBy->setHandleEvent([this] (const sf::Event& event, const sf::Vector2f& mousePosition) {
-        return standByMethod(event, mousePosition);
+        return states::button::standByHandle(*this, event, mousePosition);
     });
     standBy->setUpdate([this] (const sf::Time& frameTime) {
-        return nullptr;
+        return states::button::standByUpdate(*this, frameTime);
     });
 
     clicking = new State();
     clicking->setHandleEvent([this] (const sf::Event& event, const sf::Vector2f& mousePosition) {
-        return clickingMethod(event, mousePosition);
+        return states::button::clickingHandle(*this, event, mousePosition);
     });
     clicking->setUpdate([this] (const sf::Time& frameTime) {
-        clickAnimation->update(frameTime);
-        State* next = nullptr;
-        if (clickAnimation->isEnded())
-        {
-            next = standBy;
-        }
-        return next;
+        return states::button::clickingUpdate(*this, frameTime);
     });
 
     current = standBy;
@@ -135,27 +129,43 @@ TransformAnimation* Button::getClickAnimation()
     return clickAnimation;
 }
 
-State* Button::standByMethod(const sf::Event& event, const sf::Vector2f& mousePosition)
+State* states::button::standByHandle(Button& button, const sf::Event& event, const sf::Vector2f& mousePosition)
 {
     State* next = nullptr;
-    if (contains(mousePosition))
+    if (button.contains(mousePosition))
     {
-        if (clickAnimation->isEnded())
+        if (button.getClickAnimation()->isEnded())
         {
-            clickAnimation->start();
-            next = clicking;
+            button.getClickAnimation()->start();
+            next = button.clicking;
             std::cout << "Button click!" << std::endl;
         }
     }
     return next;
 }
 
-State* Button::clickingMethod(const sf::Event& event, const sf::Vector2f& mousePosition)
+State* states::button::clickingHandle(Button& button, const sf::Event& event, const sf::Vector2f& mousePosition)
 {
     State* next = nullptr;
-    if (clickAnimation->isEnded())
+    if (button.getClickAnimation()->isEnded())
     {
-        next = standBy;
+        next = button.standBy;
+    }
+    return next;
+}
+
+State* states::button::standByUpdate(Button& button, const sf::Time& frameTime)
+{
+    return nullptr;
+}
+
+State* states::button::clickingUpdate(Button& button, const sf::Time& frameTime)
+{
+    button.getClickAnimation()->update(frameTime);
+    State* next = nullptr;
+    if (button.getClickAnimation()->isEnded())
+    {
+        next = button.standBy;
     }
     return next;
 }

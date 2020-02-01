@@ -95,6 +95,10 @@ public:
 
     TransformAnimation* getClickAnimation();
 
+    State* standBy;
+    State* clicking;
+    State* current;
+    State* next;
 private:
     /**
      * @brief The sprite of the button.
@@ -111,12 +115,6 @@ private:
      * @brief The click animation of the button
      */
     TransformAnimation* clickAnimation;
-
-    State* standBy;
-    State* clicking;
-    State* current;
-    State* next;
-
     /**
      * @brief Called when we want to draw the button.
      * 
@@ -139,9 +137,17 @@ private:
      * @brief Set the Text Origin To Middle.
      */
     void setTextOriginToMiddle();
-
-    State* standByMethod(const sf::Event&, const sf::Vector2f&);
-    State* clickingMethod(const sf::Event&, const sf::Vector2f&);
 };
+
+namespace states
+{
+    namespace button
+    {
+        State *standByHandle(Button&, const sf::Event &, const sf::Vector2f &);
+        State *clickingHandle(Button&, const sf::Event &, const sf::Vector2f &);
+        State *standByUpdate(Button&, const sf::Time&);
+        State *clickingUpdate(Button&, const sf::Time&);
+    } // namespace button
+} // namespace states
 
 #endif
