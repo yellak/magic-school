@@ -1,3 +1,6 @@
+#ifndef _UTIL_HPP_
+#define _UTIL_HPP_
+
 #include <SFML/Graphics.hpp>
 
 #include <iostream>
@@ -24,3 +27,5 @@ namespace Util
         }
     }
 }
+
+#endif
