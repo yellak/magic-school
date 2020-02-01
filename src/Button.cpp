@@ -114,13 +114,24 @@ TransformAnimation& Button::getClickAnimation()
 State* states::button::standByHandle(Button& button, const sf::Event& event, const sf::Vector2f& mousePosition)
 {
     State* next = nullptr;
-    if (button.contains(mousePosition))
+    switch (event.type)
     {
-        if (button.getClickAnimation().isEnded())
+    case sf::Event::MouseButtonPressed:
+        if (event.mouseButton.button == sf::Mouse::Left)
         {
-            button.getClickAnimation().start();
-            next = button.clicking;
+            if (button.contains(mousePosition))
+            {
+                if (button.getClickAnimation().isEnded())
+                {
+                    button.getClickAnimation().start();
+                    next = button.clicking;
+                }
+            }
         }
+        break;
+    
+    default:
+        break;
     }
     return next;
 }

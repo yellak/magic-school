@@ -41,21 +41,15 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
+            sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
             switch (event.type)
             {
             case sf::Event::Closed:
                 window.close();
                 break;
 
-            case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left)
-                {
-                    sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-                    button.handleEvent(event, mousePosition);
-                }
-                break;
-            
             default:
+                button.handleEvent(event, mousePosition);
                 break;
             }
         }

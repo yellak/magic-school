@@ -40,21 +40,15 @@ void Game::play()
         frameTime = clock.restart();
         while (gameWindow->pollEvent(*event))
         {
+            sf::Vector2f mousePosition(sf::Mouse::getPosition(*gameWindow).x, sf::Mouse::getPosition(*gameWindow).y);
             switch (event->type)
             {
             case sf::Event::Closed:
                 gameWindow->close();
                 break;
             
-            case sf::Event::MouseButtonPressed:
-                if (event->mouseButton.button == sf::Mouse::Left)
-                {
-                    sf::Vector2f mousePosition(sf::Mouse::getPosition(*gameWindow).x, sf::Mouse::getPosition(*gameWindow).y);
-                    button->handleEvent(*event, mousePosition);
-                }
-                break;
-            
             default:
+                button->handleEvent(*event, mousePosition);
                 break;
             }
         }
