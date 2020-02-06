@@ -3,9 +3,9 @@
 int main()
 {
     sf::RenderWindow window;
-    window.create(sf::VideoMode(600, 600), "Scene Test");
+    window.create(sf::VideoMode(640, 480), "Scene Test");
 
-    Scene* scene = new scene::MainMenu();
+    Scene* scene = new scene::MainMenu(window);
 
     sf::Time frameTime = sf::microseconds(0.f);
 
