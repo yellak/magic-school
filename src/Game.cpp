@@ -39,7 +39,7 @@ void Game::play()
 
         scene->update(frameTime);
         
-        gameWindow->clear();
+        gameWindow->clear(sf::Color::White);
         gameWindow->draw(*scene);
         gameWindow->display();
     }
