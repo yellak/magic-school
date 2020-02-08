@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "Button.hpp"
+#include "MainMenu.hpp"
 
 class Game
 {

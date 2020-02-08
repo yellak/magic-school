@@ -16,23 +16,7 @@ Game::~Game()
 
 void Game::play()
 {
-    // TODO Take this to other place other than here
-    Button* button = new Button();
-    auto texture = new sf::Texture();
-    texture->loadFromFile("assets/textures/defaultButton.png");
-    button->setTexture(*texture);
-
-    auto font = new sf::Font();
-    font->loadFromFile("assets/fonts/Ubuntu-M.ttf");
-    auto text = new sf::Text();
-    text->setFont(*font);
-    text->setFillColor(sf::Color::Black);
-    button->setText(*text);
-    button->setString("Start!");
-    button->setCharacterSize(20);
-
-    sf::Vector2f newButtonPosition(gameWindow->getSize().x/2, gameWindow->getSize().y/2);
-    button->setPosition(newButtonPosition);
+    Scene* scene = new scene::MainMenu(*gameWindow);
 
     clock.restart();
     while (gameWindow->isOpen())
@@ -48,22 +32,17 @@ void Game::play()
                 break;
             
             default:
-                button->handleEvent(*event, mousePosition);
+                scene->handleEvent(*event, mousePosition);
                 break;
             }
         }
 
-        button->update(frameTime);
+        scene->update(frameTime);
         
-        gameWindow->clear(sf::Color(148, 0, 211));
-        gameWindow->draw(*button);
+        gameWindow->clear();
+        gameWindow->draw(*scene);
         gameWindow->display();
     }
-
-    delete button;
-    delete texture;
-    delete font;
-    delete text;
 }
 
 sf::RenderWindow* Game::getGameWindow()
