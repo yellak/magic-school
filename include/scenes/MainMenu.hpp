@@ -63,6 +63,13 @@ namespace scene
              */
             void loadBackgroung(const sf::Vector2u& size);
 
+            /**
+             * @brief Load the button properties.
+             * Charges the button with the texture, the text. Loads
+             * its position and other things if necessary.
+             * 
+             * @param backgroundSize 
+             */
             void loadButton(const sf::Vector2u& backgroundSize);
     };
 }

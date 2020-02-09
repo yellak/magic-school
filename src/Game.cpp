@@ -33,6 +33,9 @@ Game::~Game()
     std::cout << "The Game is ending..." << std::endl;
     delete gameWindow;
     delete event;
+    delete mainMenu;
+    delete playing;
+    delete state;
 }
 
 void Game::play()
