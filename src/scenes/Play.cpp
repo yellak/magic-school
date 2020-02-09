@@ -10,7 +10,7 @@ namespace scene
     {
     }
 
-    void Play::update(sf::Time& frameTime)
+    void Play::update(const sf::Time& frameTime)
     {
     }
 

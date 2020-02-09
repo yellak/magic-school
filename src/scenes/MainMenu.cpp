@@ -33,9 +33,17 @@ namespace scene
     void MainMenu::handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition)
     {
         playButton.handleEvent(event, mousePosition);
+        if (!playButton.getClickAnimation().isEnded())
+        {
+            ended = true;
+        }
+        else
+        {
+            ended = false;
+        }
     }
 
-    void MainMenu::update(sf::Time& frameTime)
+    void MainMenu::update(const sf::Time& frameTime)
     {
         playButton.update(frameTime);
     }
@@ -45,4 +53,5 @@ namespace scene
         target.draw(background, states);
         target.draw(playButton, states);
     }
+
 }

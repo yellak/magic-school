@@ -12,7 +12,7 @@ namespace scene
 
             void handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition);
 
-            void update(sf::Time& frameTime);
+            void update(const sf::Time& frameTime);
         
         protected:
             /**

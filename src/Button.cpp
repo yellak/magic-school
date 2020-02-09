@@ -22,18 +22,18 @@ clickAnimation(totalAnimationTime, switchAnimantionTime)
 
     standBy = new State();
     state = new StateMachine(standBy);
-    standBy->setHandleEvent([this] (const sf::Event& event, const sf::Vector2f& mousePosition) {
+    standBy->setHandleEvent([this] (auto event, auto mousePosition) {
         return states::button::standByHandle(*this, event, mousePosition);
     });
-    standBy->setUpdate([this] (const sf::Time& frameTime) {
+    standBy->setUpdate([this] (auto frameTime) {
         return states::button::standByUpdate(*this, frameTime);
     });
 
     clicking = new State();
-    clicking->setHandleEvent([this] (const sf::Event& event, const sf::Vector2f& mousePosition) {
+    clicking->setHandleEvent([this] (auto event, auto mousePosition) {
         return states::button::clickingHandle(*this, event, mousePosition);
     });
-    clicking->setUpdate([this] (const sf::Time& frameTime) {
+    clicking->setUpdate([this] (auto frameTime) {
         return states::button::clickingUpdate(*this, frameTime);
     });
 }

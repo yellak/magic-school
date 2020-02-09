@@ -30,7 +30,7 @@ namespace scene
              * 
              * @param frameTime 
              */
-            void update(sf::Time& frameTime);
+            void update(const sf::Time& frameTime);
 
         protected:
             /**

@@ -3,57 +3,87 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "StateMachine.hpp"
 #include "MainMenu.hpp"
+#include "Play.hpp"
 
 class Game
 {
-private:
+    public:
+        /**
+         * @brief Construct a new Game object.
+         */
+        Game();
 
-    /**
-     * @brief The window where the whole game is located.
-     */
-    sf::RenderWindow* gameWindow;
+        /**
+         * @brief Destroy the Game object.
+         */
+        ~Game();
 
-    /**
-     * @brief The event object of the whole game.
-     */
-    sf::Event* event;
+        /**
+         * @brief The main method of the game.
+         * This method has the main loop of the game.
+         */
+        void play();
 
-    /**
-     * @brief The clock that will control the whole aplication.
-     */
-    sf::Clock clock;
+        State* mainMenu;
+        State* playing;
 
-    /**
-     * @brief The time that the main loop takes to be excuted.
-     */
-    sf::Time frameTime;
+        /////////////////////////////////////////////////////
+        // Getters and setters
+        /////////////////////////////////////////////////////
 
-public:
+        sf::RenderWindow* getGameWindow();
 
-    /**
-     * @brief Construct a new Game object.
-     */
-    Game();
+        sf::Event* getEvent();
 
-    /**
-     * @brief Destroy the Game object.
-     */
-    ~Game();
+        inline Scene* getScene()
+        {
+            return scene;
+        }
 
-    /**
-     * @brief The main method of the game.
-     * This method has the main loop of the game.
-     */
-    void play();
+        inline void setScene(Scene* scene)
+        {
+            this->scene = scene;
+        }
 
-    /////////////////////////////////////////////////////
-    // Getters and setters
-    /////////////////////////////////////////////////////
+    private:
 
-    sf::RenderWindow* getGameWindow();
+        /**
+         * @brief The window where the whole game is located.
+         */
+        sf::RenderWindow* gameWindow;
 
-    sf::Event* getEvent();
+        /**
+         * @brief The event object of the whole game.
+         */
+        sf::Event* event;
+
+        /**
+         * @brief The clock that will control the whole aplication.
+         */
+        sf::Clock clock;
+
+        /**
+         * @brief The time that the main loop takes to be excuted.
+         */
+        sf::Time frameTime;
+
+        Scene* scene;
+
+        StateMachine* state;
 };
+
+namespace states
+{
+    namespace game
+    {
+        State* mainMenuHandle(Game&, const sf::Event&, const sf::Vector2f&);
+        State* mainMenuUpdate(Game&, const sf::Time&);
+
+        State* playingHandle(Game&, const sf::Event&, const sf::Vector2f&);
+        State* playingUpdate(Game&, const sf::Time&);
+    }
+}
 
 #endif
