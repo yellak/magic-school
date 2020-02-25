@@ -98,11 +98,6 @@ TransformAnimation& Button::getClickAnimation()
     return clickAnimation;
 }
 
-states::button::StandBy::StandBy(Button* bt):
-button(bt)
-{
-}
-
 State* states::button::StandBy::update(const sf::Time& frameTime)
 {
     return nullptr;
@@ -131,11 +126,6 @@ State* states::button::StandBy::handleEvent(const sf::Event& event, const sf::Ve
         break;
     }
     return next;
-}
-
-states::button::Clicking::Clicking(Button* bt):
-button(bt)
-{
 }
 
 State* states::button::Clicking::update(const sf::Time& frameTime)

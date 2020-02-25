@@ -107,45 +107,14 @@ namespace states
     namespace game
     {
         /**
-         * @brief Handle state while in main menu method for the game.
-         * Controls how the game behave when in the main menu state
-         * and inside the event loop.
-         * 
-         * @return State* The next state of the game.
+         * @brief The Main Menu state of the game.
+         * At this state, the game is drawing the main menu scene
+         * in the screen.
          */
-        State* mainMenuHandle(Game&, const sf::Event&, const sf::Vector2f&);
-
-        /**
-         * @brief Update state while in main menu method for the game.
-         * Controls how the game behave when in the main menu state
-         * and after the event loop.
-         * 
-         * @return State* The next state of the game.
-         */
-        State* mainMenuUpdate(Game&, const sf::Time&);
-
-        /**
-         * @brief Handle state while playing method for the game.
-         * Controls how the game behave when in the playing state
-         * and inside the event loop.
-         * 
-         * @return State* The next state of the game.
-         */
-        State* playingHandle(Game&, const sf::Event&, const sf::Vector2f&);
-
-        /**
-         * @brief Update state while playing method for the game.
-         * Controls how the game behave when in the playing state
-         * and after the event loop.
-         * 
-         * @return State* The next state of the game.
-         */
-        State* playingUpdate(Game&, const sf::Time&);
-
         class MainMenu : public State
         {
             public:
-                inline MainMenu(Game* g): game(g) {};
+                inline MainMenu(Game* game): game(game) {};
 
                 virtual State* update(const sf::Time&);
                 virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);
@@ -154,10 +123,15 @@ namespace states
                 Game* game;
         };
 
+        /**
+         * @brief Playing state of the game.
+         * At this state, the game itself is running ad it's getting drawn
+         * in the screen.
+         */
         class Playing : public State
         {
             public:
-                inline Playing(Game* g): game(g) {};
+                inline Playing(Game* game): game(game) {};
                 
                 virtual State* update(const sf::Time&);
                 virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);

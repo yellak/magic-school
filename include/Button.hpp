@@ -168,15 +168,18 @@ private:
 namespace states
 {
     /**
-     * @brief Button states.
-     * 
+     * @brief States of the Button.
      */
     namespace button
     {
+        /**
+         * @brief StandBy state of the button.
+         * At this state, the button has no action from any kind.
+         */
         class StandBy : public State
         {
             public:
-                StandBy(Button*);
+                inline StandBy(Button* button): button(button) {};
 
                 virtual State* update(const sf::Time&);
 
@@ -186,10 +189,14 @@ namespace states
                 Button* button;
         };
 
+        /**
+         * @brief Clicking state of the button.
+         * At this state, the button is making the click animation.
+         */
         class Clicking : public State
         {
             public:
-                Clicking(Button*);
+                inline Clicking(Button* button): button(button) {};
 
                 virtual State* update(const sf::Time&);
 
