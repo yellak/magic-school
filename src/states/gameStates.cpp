@@ -16,18 +16,6 @@ namespace states
             return next;
         }
 
-        State* mainMenuHandle(Game& game, const sf::Event& event, const sf::Vector2f& mousePosition)
-        {
-            game.getScene()->handleEvent(event, mousePosition);
-            return nextFromMainMenu(game);
-        }
-
-        State* mainMenuUpdate(Game& game, const sf::Time& frameTime)
-        {
-            game.getScene()->update(frameTime);
-            return nextFromMainMenu(game);
-        }
-
         State* nextFromPlaying(Game& game)
         {
             State* next = nullptr;
@@ -40,16 +28,28 @@ namespace states
             return next;
         }
 
-        State* playingHandle(Game& game, const sf::Event& event, const sf::Vector2f& mousePosition)
+        State* MainMenu::update(const sf::Time& frameTime)
         {
-            game.getScene()->handleEvent(event, mousePosition);
-            return nextFromPlaying(game);
+            game->getScene()->update(frameTime);
+            return nextFromMainMenu(*game);
         }
 
-        State* playingUpdate(Game& game, const sf::Time& frameTime)
+        State* MainMenu::handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition)
         {
-            game.getScene()->update(frameTime);
-            return nextFromPlaying(game);
+            game->getScene()->handleEvent(event, mousePosition);
+            return nextFromMainMenu(*game);
+        }
+
+        State* Playing::update(const sf::Time& frameTime)
+        {
+            game->getScene()->update(frameTime);
+            return nextFromPlaying(*game);
+        }
+
+        State* Playing::handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition)
+        {
+            game->getScene()->handleEvent(event, mousePosition);
+            return nextFromPlaying(*game);
         }
     }
 }

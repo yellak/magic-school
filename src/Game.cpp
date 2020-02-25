@@ -8,24 +8,9 @@ Game::Game()
 
     scene = new scene::MainMenu(*gameWindow);
 
-    mainMenu = new State();
-    playing = new State();
+    mainMenu = new states::game::MainMenu(this);
+    playing = new states::game::Playing(this);
     state = new StateMachine(mainMenu);
-
-    mainMenu->setHandleEvent([this] (auto event, auto mousePosition) {
-        return states::game::mainMenuHandle(*this, event , mousePosition);
-    });
-    mainMenu->setUpdate([this] (auto frameTime) {
-        return states::game::mainMenuUpdate(*this, frameTime);
-    });
-
-    playing->setHandleEvent([this] (auto event, auto mousePosition) {
-        return states::game::playingHandle(*this, event, mousePosition);
-    });
-
-    playing->setUpdate([this] (auto frameTime) {
-        return states::game::playingUpdate(*this, frameTime);
-    });
 }
 
 Game::~Game()

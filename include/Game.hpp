@@ -141,6 +141,30 @@ namespace states
          * @return State* The next state of the game.
          */
         State* playingUpdate(Game&, const sf::Time&);
+
+        class MainMenu : public State
+        {
+            public:
+                inline MainMenu(Game* g): game(g) {};
+
+                virtual State* update(const sf::Time&);
+                virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);
+            
+            private:
+                Game* game;
+        };
+
+        class Playing : public State
+        {
+            public:
+                inline Playing(Game* g): game(g) {};
+                
+                virtual State* update(const sf::Time&);
+                virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);
+
+            private:
+                Game* game;
+        };
     }
 }
 
