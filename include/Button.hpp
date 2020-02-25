@@ -173,41 +173,31 @@ namespace states
      */
     namespace button
     {
-        /**
-         * @brief Defines handleEvent method in the standBy state.
-         * Implements the behaviour of the standBy state for handling
-         * events.
-         * 
-         * @return State* The next state, nullptr if there isn't.
-         */
-        State* standByHandle(Button&, const sf::Event&, const sf::Vector2f&);
+        class StandBy : public State
+        {
+            public:
+                StandBy(Button*);
 
-        /**
-         * @brief Defines update method in the standBy state.
-         * Implements the behaviour of the standBy state for update
-         * calls.
-         * 
-         * @return State* The next state, nullptr if there isn't.
-         */
-        State* standByUpdate(Button&, const sf::Time&);
+                virtual State* update(const sf::Time&);
 
-        /**
-         * @brief Defines handleEvent method in the clicking state.
-         * Implements the behaviour of the clicking state for handling
-         * events.
-         * 
-         * @return State* The next state, nullptr if there isn't.
-         */
-        State* clickingHandle(Button&, const sf::Event&, const sf::Vector2f&);
+                virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);
 
-        /**
-         * @brief Defines update method in the clicking state.
-         * Implements the behaviour of the clicking state for update
-         * calls.
-         * 
-         * @return State* The next state, nullptr if there isn't.
-         */
-        State* clickingUpdate(Button&, const sf::Time&);
+            private:
+                Button* button;
+        };
+
+        class Clicking : public State
+        {
+            public:
+                Clicking(Button*);
+
+                virtual State* update(const sf::Time&);
+
+                virtual State* handleEvent(const sf::Event&, const sf::Vector2f&);
+
+            private:
+                Button* button;
+        };
     } // namespace button
 } // namespace states
 
