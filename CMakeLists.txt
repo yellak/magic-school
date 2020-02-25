@@ -22,11 +22,11 @@ set(SCENE_TESTS_SRC "src/tests/SceneTest.cpp" "${SOURCES}")
 add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
 target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
 
-#add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
-#target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
+add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
+target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
 
-#add_executable(AnimationTest "src/tests/AnimationTest.cpp" "${SOURCES}")
-#target_link_libraries(AnimationTest "${SFML_LIBRARIES}")
+add_executable(AnimationTest "src/tests/AnimationTest.cpp" "${SOURCES}")
+target_link_libraries(AnimationTest "${SFML_LIBRARIES}")
 
 add_executable(SceneTest "${SCENE_TESTS_SRC}")
 target_link_libraries(SceneTest "${SFML_LIBRARIES}")
