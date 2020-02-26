@@ -6,6 +6,7 @@ namespace scene
     {
         loadButton(window.getSize());
         loadBackgroung(window.getSize());
+        ended = false;
     }
 
     void MainMenu::loadBackgroung(const sf::Vector2u& size)
@@ -28,19 +29,15 @@ namespace scene
         float x = backgroundSize.x/2.f;
         float y = backgroundSize.y/2.f;
         playButton.move(x, y);
+
+        playButton.addClickListener([this] () {
+            ended = true;
+        });
     }
 
     void MainMenu::handleEvent(const sf::Event& event, const sf::Vector2f& mousePosition)
     {
         playButton.handleEvent(event, mousePosition);
-        if (!playButton.getClickAnimation().isEnded())
-        {
-            ended = true;
-        }
-        else
-        {
-            ended = false;
-        }
     }
 
     void MainMenu::update(const sf::Time& frameTime)

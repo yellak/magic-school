@@ -46,4 +46,7 @@ int main()
         window.draw(*scene);
         window.display();
     }
+
+    delete playScene;
+    delete mainMenuScene;
 }

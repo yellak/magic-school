@@ -35,6 +35,10 @@ Button::~Button()
     {
         delete clicking;
     }
+    if (state != nullptr)
+    {
+        delete state;
+    }
 }
 
 void Button::update(const sf::Time& frameTime)
@@ -98,6 +102,11 @@ TransformAnimation& Button::getClickAnimation()
     return clickAnimation;
 }
 
+void Button::addClickListener(std::function<void(void)> listener)
+{
+    addListener("click", listener);
+}
+
 State* states::button::StandBy::update(const sf::Time& frameTime)
 {
     return nullptr;
@@ -135,6 +144,7 @@ State* states::button::Clicking::update(const sf::Time& frameTime)
     if (button->getClickAnimation().isEnded())
     {
         next = button->standBy;
+        button->notifyListeners("click");
     }
     return next;
 }

@@ -2,10 +2,20 @@
 #define _BUTTON_HPP_
 
 #include <SFML/Graphics.hpp>
-#include <functional>
 #include "Util.hpp"
 #include "TransformAnimation.hpp"
 #include "StateMachine.hpp"
+#include "Listenable.hpp"
+
+
+namespace states
+{
+    namespace button
+    {
+        class StandBy;
+        class Clicking;
+    }
+}
 
 /**
  * @brief Button class.
@@ -17,8 +27,11 @@
  * The button has to have a texture, if it does not, it won't work
  * properly.
  */
-class Button : public sf::Drawable, public sf::Transformable
+class Button : public sf::Drawable, public sf::Transformable, public Listenable
 {
+    friend class states::button::StandBy;
+    friend class states::button::Clicking;
+
 public:
     /**
      * @brief Construct a new Button object.
@@ -84,6 +97,7 @@ public:
      */
     void setCharacterSize(unsigned int size);
 
+    void addClickListener(std::function<void(void)>);
 
     ////////////////////////////////////////////////////////////////
     // Public attributes
