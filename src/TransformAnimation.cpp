@@ -1,4 +1,4 @@
-#include "TransformAnimation.hpp"
+#include <TransformAnimation.hpp>
 
 TransformAnimation::TransformAnimation(sf::Time totalTime, sf::Time switchTime):
 Animation(totalTime, switchTime)

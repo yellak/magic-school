@@ -6,10 +6,11 @@ project("${PROJECT_NAME}" VERSION 0.1.0)
 include_directories("include" "include/states" "include/scenes")
 
 include(CTest)
-enable_testing()
+
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(SOURCES "src/Button.cpp" "src/TransformAnimation.cpp" "src/Animation.cpp"
-            "src/scenes/MainMenu.cpp" "src/scenes/Play.cpp")
+            "src/scenes/MainMenu.cpp" "src/scenes/Play.cpp" "src/Listenable.cpp")
 
 set(SFML_LIBRARIES "sfml-graphics" "sfml-window" "sfml-system")
 
@@ -17,20 +18,21 @@ set(MAIN_SOURCES "src/main.cpp" "src/Game.cpp" "src/states/gameStates.cpp" "${SO
 
 set(BUTTON_TESTS_SRC "src/tests/ButtonTest.cpp" "${SOURCES}")
 
-set(SCENE_TESTS_SRC "src/tests/SceneTest.cpp" "${SOURCES}")
+set(SCENE_TEST_SRC "src/tests/SceneTest.cpp" "${SOURCES}")
 
 add_executable("${PROJECT_NAME}" "${MAIN_SOURCES}")
 target_link_libraries("${PROJECT_NAME}" "${SFML_LIBRARIES}")
 
-add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
-target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
+enable_testing()
+
+add_executable(SceneTest "${SCENE_TEST_SRC}")
+target_link_libraries(SceneTest "${SFML_LIBRARIES}")
+add_test(SCENE bin/SceneTest)
 
 add_executable(AnimationTest "src/tests/AnimationTest.cpp" "${SOURCES}")
 target_link_libraries(AnimationTest "${SFML_LIBRARIES}")
+add_test(ANIMATION bin/AnimationTest)
 
-add_executable(SceneTest "${SCENE_TESTS_SRC}")
-target_link_libraries(SceneTest "${SFML_LIBRARIES}")
-
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
+target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
+add_test(BUTTON bin/ButtonTest)

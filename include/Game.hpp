@@ -3,9 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "StateMachine.hpp"
-#include "MainMenu.hpp"
-#include "Play.hpp"
+#include <StateMachine.hpp>
+#include <MainMenu.hpp>
+#include <Play.hpp>
 
 class Game
 {

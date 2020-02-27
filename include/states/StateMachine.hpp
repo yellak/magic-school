@@ -1,7 +1,7 @@
 #ifndef _STATE_MACHINE_HPP_
 #define _STATE_MACHINE_HPP_
 
-#include "State.hpp"
+#include <State.hpp>
 #include <SFML/Graphics.hpp>
 
 /**

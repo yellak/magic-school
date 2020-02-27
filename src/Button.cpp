@@ -1,4 +1,4 @@
-#include "Button.hpp"
+#include <Button.hpp>
 
 Button::Button() : Button(sf::seconds(0.1f), sf::seconds(0.002))
 {

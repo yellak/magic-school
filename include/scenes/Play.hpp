@@ -1,7 +1,7 @@
 #ifndef _PLAY_SCENE_HPP_
 #define _PLAY_SCENE_HPP_
 
-#include "Scene.hpp"
+#include <Scene.hpp>
 
 namespace scene
 {

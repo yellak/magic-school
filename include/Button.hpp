@@ -2,10 +2,10 @@
 #define _BUTTON_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "Util.hpp"
-#include "TransformAnimation.hpp"
-#include "StateMachine.hpp"
-#include "Listenable.hpp"
+#include <Util.hpp>
+#include <TransformAnimation.hpp>
+#include <StateMachine.hpp>
+#include <Listenable.hpp>
 
 
 namespace states

@@ -5,7 +5,7 @@
 sf::Text* loadText()
 {
     auto font = new sf::Font();
-    font->loadFromFile("assets/fonts/Ubuntu-M.ttf");
+    font->loadFromFile("../assets/fonts/Ubuntu-M.ttf");
     auto text = new sf::Text();
     text->setFont(*font);
     text->setCharacterSize(20);

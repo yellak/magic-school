@@ -2,7 +2,7 @@
 #define _SCENE_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "StateMachine.hpp"
+#include <StateMachine.hpp>
 
 /**
  * @brief Represents whats is shown in the screen.

@@ -1,4 +1,4 @@
-#include "Animation.hpp"
+#include <Animation.hpp>
 
 Animation::Animation(sf::Time totalTime, sf::Time switchTime) :
 totalTime(totalTime),

@@ -1,7 +1,7 @@
 #ifndef _TRANSFORM_ANIMATION_HPP_
 #define _TRANSFORM_ANIMATION_HPP_
 
-#include "Animation.hpp"
+#include <Animation.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <functional>

@@ -11,7 +11,10 @@ namespace scene
 
     void MainMenu::loadBackgroung(const sf::Vector2u& size)
     {
-        backgroundTexture.loadFromFile("assets/textures/mainMenuBackground.png");
+        if (!backgroundTexture.loadFromFile("../assets/textures/mainMenuBackground.png"))
+        {
+            std::cout << "Error loading file" << std::endl;
+        }
         background.setTexture(backgroundTexture);
 
         float x = size.x/background.getLocalBounds().width;
@@ -23,7 +26,10 @@ namespace scene
 
     void MainMenu::loadButton(const sf::Vector2u& backgroundSize)
     {
-        playButtonTexture.loadFromFile("assets/textures/defaultButton.png");
+        if (!playButtonTexture.loadFromFile("../assets/textures/defaultButton.png"))
+        {
+            std::cout << "Error loading file" << std::endl;
+        }
         playButton.setTexture(playButtonTexture);
 
         float x = backgroundSize.x/2.f;

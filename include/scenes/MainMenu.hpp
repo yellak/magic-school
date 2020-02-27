@@ -2,8 +2,8 @@
 #define _MAIN_MENU_SCENE_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "Scene.hpp"
-#include "Button.hpp"
+#include <Scene.hpp>
+#include <Button.hpp>
 
 namespace scene
 {
