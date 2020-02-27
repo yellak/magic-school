@@ -10,7 +10,8 @@ include(CTest)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(SOURCES "src/Button.cpp" "src/TransformAnimation.cpp" "src/Animation.cpp"
-            "src/scenes/MainMenu.cpp" "src/scenes/Play.cpp" "src/Listenable.cpp")
+            "src/scenes/MainMenu.cpp" "src/scenes/Play.cpp" "src/Listenable.cpp"
+            "src/PathLoader.cpp")
 
 set(SFML_LIBRARIES "sfml-graphics" "sfml-window" "sfml-system")
 
@@ -36,3 +37,7 @@ add_test(ANIMATION bin/AnimationTest)
 add_executable(ButtonTest "${BUTTON_TESTS_SRC}")
 target_link_libraries(ButtonTest "${SFML_LIBRARIES}")
 add_test(BUTTON bin/ButtonTest)
+
+add_executable(PathLoaderTest "src/tests/PathLoaderTest.cpp" "${SOURCES}")
+target_link_libraries(PathLoaderTest "${SFML_LIBRARIES}")
+add_test(PATH_LOADER bin/PathLoaderTest)

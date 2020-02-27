@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <Scene.hpp>
 #include <Button.hpp>
+#include <PathLoader.hpp>
 
 namespace scene
 {
