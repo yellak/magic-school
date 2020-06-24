@@ -11,7 +11,7 @@ namespace scene
 
     void MainMenu::loadBackgroung(const sf::Vector2u& size)
     {
-        if (!backgroundTexture.loadFromFile(PathLoader::toTexture("mainMenuBackground.png")))
+        if (!backgroundTexture.loadFromFile(PathLoader::toTexture("mainMenuBackground")))
         {
             std::cout << "Error loading file" << std::endl;
         }
@@ -26,7 +26,7 @@ namespace scene
 
     void MainMenu::loadButton(const sf::Vector2u& backgroundSize)
     {
-        if (!playButtonTexture.loadFromFile("../assets/textures/defaultButton.png"))
+        if (!playButtonTexture.loadFromFile(PathLoader::toTexture("defaultButton")))
         {
             std::cout << "Error loading file" << std::endl;
         }

@@ -3,6 +3,9 @@
 
 #include <string>
 #include <initializer_list>
+#include <experimental/filesystem>
+
+namespace fs = std::experimental::filesystem;
 
 /**
  * @brief Load the path to an object.
@@ -25,55 +28,42 @@ public:
     static std::string toFont(std::string);
 
     /**
-     * @brief Put an extension to the file name.
-     * Puts the extension in the file name if it does not have any,
-     * if it does, the method does not put the extension.
-     * 
-     * @param file The file name.
-     * @param extension The extension to put.
-     * @return std::string The file name with the extension.
-     */
-    static std::string putExtension(std::string file, std::string extension);
-
-    /**
      * @brief Load the path to the assets folder.
      * 
      * @return std::string The path created.
      */
     static std::string toAssetsFolder();
 
+    /**
+     * @brief Get the Root directory of the project.
+     * 
+     * @return std::string The root directory.
+     */
+    static fs::path getRoot();
+
 private:
     /**
-     * @brief Concatenate a list of strings.
-     * 
-     * @param folders The List of strings.
-     * @return std::string The path created.
-     */
-    static std::string pathBuilder(std::initializer_list<std::string> folders);
-
-    /**
      * @brief The root directory.
-     * "../" by default
      */
-    static std::string root;
+    static fs::path root;
 
     /**
      * @brief The assets folder name.
-     * "assets/" by default.
+     * "assets" by default.
      */
-    static std::string assets;
+    static fs::path assets;
 
     /**
      * @brief The textures folder name.
-     * "textures/" by default.
+     * "textures" by default.
      */
-    static std::string texture;
+    static fs::path texture;
 
     /**
      * @brief The fonts folder name.
-     * "fonts/" by default.
+     * "fonts" by default.
      */
-    static std::string font;
+    static fs::path font;
 };
 
 #endif // _PATH_LOADER_HPP_

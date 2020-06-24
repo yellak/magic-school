@@ -1,11 +1,17 @@
 #include <iostream>
-#include "Animation.hpp"
-#include "TransformAnimation.hpp"
+#include <Animation.hpp>
+#include <TransformAnimation.hpp>
+#include <PathLoader.hpp>
+
+int error = 0;
 
 sf::Text* loadText()
 {
     auto font = new sf::Font();
-    font->loadFromFile("../assets/fonts/Ubuntu-M.ttf");
+    if (!font->loadFromFile(PathLoader::toFont("Ubuntu-M")))
+    {
+        error++;
+    }
     auto text = new sf::Text();
     text->setFont(*font);
     text->setCharacterSize(20);
@@ -70,5 +76,5 @@ int main()
         window.display();
     }
 
-    return 0;
+    return error;
 }

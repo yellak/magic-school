@@ -1,19 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include "Button.hpp"
+#include <Button.hpp>
+#include <PathLoader.hpp>
 
 sf::Texture* loadTexture()
 {
     auto texture = new sf::Texture();
-    texture->loadFromFile("../assets/textures/defaultButton.png");
+    texture->loadFromFile(PathLoader::toTexture("defaultButton"));
     return texture;
 }
 
 sf::Text* loadText()
 {
     auto font = new sf::Font();
-    font->loadFromFile("../assets/fonts/Ubuntu-M.ttf");
+    font->loadFromFile(PathLoader::toFont("Ubuntu-M"));
     auto text = new sf::Text();
     text->setFont(*font);
     text->setCharacterSize(20);

@@ -1,42 +1,41 @@
 #include <PathLoader.hpp>
 
-std::string PathLoader::root = "../";
-std::string PathLoader::assets = "assets/";
-std::string PathLoader::texture = "textures/";
-std::string PathLoader::font = "fonts/";
+fs::path PathLoader::root = "";
+fs::path PathLoader::assets = "assets";
+fs::path PathLoader::texture = "textures";
+fs::path PathLoader::font = "fonts";
 
-std::string PathLoader::pathBuilder(std::initializer_list<std::string> folders)
+fs::path PathLoader::getRoot()
 {
-    std::string result;
-    for (auto folder : folders)
+    root = fs::current_path();
+    if (!fs::exists(root/assets))
     {
-        result += folder;
+        root.remove_filename();
     }
-    return result;
-}
-
-std::string PathLoader::putExtension(std::string file, std::string extension)
-{
-    std::string result = std::string(file);
-    if (file.find(".") == std::string::npos)
-    {
-        result.append(extension);
-    }
-    return result;
+    return root;
 }
 
 std::string PathLoader::toAssetsFolder()
 {
-    return pathBuilder({root, assets});
+    return getRoot()/assets;
 }
 
 std::string PathLoader::toTexture(std::string fileName)
 {
-    fileName = putExtension(fileName, ".png");
-    return pathBuilder({root, assets, texture, fileName});
+    auto path = toAssetsFolder()/texture/fs::path(fileName);
+    if (!path.has_extension())
+    {
+        path.replace_extension(".png");
+    }
+    return path;
 }
 
 std::string PathLoader::toFont(std::string fileName)
 {
-    return pathBuilder({root, assets, font, fileName});
+    auto path = toAssetsFolder()/font/fs::path(fileName);
+    if (!path.has_extension())
+    {
+        path.replace_extension(".ttf");
+    }
+    return path;
 }
